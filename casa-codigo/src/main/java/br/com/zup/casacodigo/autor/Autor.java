@@ -11,6 +11,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 public class Autor {
 
@@ -19,22 +21,23 @@ public class Autor {
 	private Integer id;
 	
 	@Column(nullable = false)
-	@NotBlank(message = "Campo nome não pode ser vazio")
+	@NotBlank
 	private String nome;
 	
-	@Column(nullable = false, unique = true)
-	@NotBlank(message = "Campo e-mail não pode ser vazio")
+	@Column(nullable = false)
+	@NotBlank
 	@Email
 	private String email;
 	
 	@Column(nullable = false)
-	@NotNull(message = "Campo instante não pode ser vazio")
+	@NotNull
 	private String descricao;
 
+	@CreationTimestamp
 	@Column(nullable = false)
-	@NotBlank
 	private LocalDateTime instante = LocalDateTime.now();
 
+	@Deprecated
 	public Autor() {
 	}
 
