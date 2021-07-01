@@ -26,7 +26,7 @@ public class Autor {
 	
 	@Column(nullable = false)
 	@NotBlank
-	@Email
+	@Email(message = "Informe um endereço de e-mail válido")
 	private String email;
 	
 	@Column(nullable = false)
