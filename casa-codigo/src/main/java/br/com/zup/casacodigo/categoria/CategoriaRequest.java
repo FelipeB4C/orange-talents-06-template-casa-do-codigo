@@ -1,12 +1,10 @@
 package br.com.zup.casacodigo.categoria;
 
-import javax.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 
+@CategoriaInsert
 public class CategoriaRequest {
 
-	@NotBlank
 	private String nome;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
