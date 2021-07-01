@@ -1,4 +1,4 @@
-package br.com.zup.casacodigo.categoria;
+package br.com.zup.casacodigo.compartilhado;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,15 +10,19 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Constraint(validatedBy = {CategoriaInsertValidator.class})
-@Target({ElementType.TYPE})
+@Constraint(validatedBy = {UniqueValueValidator.class})
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CategoriaInsert {
+public @interface UniqueValue {
 
-	String message() default "Erro de validação, já existe esse e-mail";
+	String message() default "Erro de validação";
 
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};
+	
+	String fieldName();
+	
+	Class<?> domainClass();
 
 }
