@@ -27,16 +27,15 @@ public class Livro {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-
 	@Column(unique = true)
 	@NotBlank
 	private String titulo;
 
 	@NotBlank
-	@Size(max=500)
+	@Size(max = 500)
 	private String resumo;
 
-	@Column(columnDefinition="text")
+	@Column(columnDefinition = "text")
 	private String sumario;
 
 	@NotNull
@@ -63,6 +62,11 @@ public class Livro {
 	@ManyToOne
 	private Autor autor;
 
+	@Deprecated
+	public Livro() {
+
+	}
+
 	public Livro(String titulo, String resumo, String sumario, BigDecimal preco, int numeroPaginas, String isbn,
 			LocalDate dataPublicacao, Categoria categoria, Autor autor) {
 		this.titulo = titulo;
@@ -75,5 +79,14 @@ public class Livro {
 		this.categoria = categoria;
 		this.autor = autor;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
 
 }
