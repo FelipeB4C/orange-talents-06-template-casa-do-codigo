@@ -44,5 +44,12 @@ public class LivroResource {
 		List<LivroResponse> listResponse = livros.stream().map(obj -> new LivroResponse(obj)).collect(Collectors.toList());;
 		return ResponseEntity.ok().body(listResponse);
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<List<LivroDetalhesResponse>> findAllDetails(){
+		List<Livro> livros = repo.findAll();
+		List<LivroDetalhesResponse> listResponse = livros.stream().map(obj -> new LivroDetalhesResponse(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listResponse);
+	}
 
 }
