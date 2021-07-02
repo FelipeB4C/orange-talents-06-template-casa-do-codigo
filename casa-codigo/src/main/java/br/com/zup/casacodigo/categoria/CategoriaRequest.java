@@ -18,7 +18,7 @@ public class CategoriaRequest {
 		this.nome = nome;
 	}
 
-	public Categoria toModel(CategoriaRequest objDto) {
+	public Categoria toModel() {
 		return new Categoria(this.nome);
 	}
 

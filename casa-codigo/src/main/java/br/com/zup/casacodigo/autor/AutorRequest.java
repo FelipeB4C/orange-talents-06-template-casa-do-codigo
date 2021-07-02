@@ -27,7 +27,7 @@ public class AutorRequest {
 		this.descricao = descricao;
 	}
 
-	public Autor toModel(AutorRequest obj) {
+	public Autor toModel() {
 		return new Autor(this.nome, this.email, this.descricao);
 	}
 

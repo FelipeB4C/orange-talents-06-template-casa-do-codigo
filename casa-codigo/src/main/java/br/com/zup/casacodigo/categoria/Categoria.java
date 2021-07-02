@@ -17,12 +17,12 @@ public class Categoria {
 	@Column(nullable = false)
 	@NotBlank
 	private String nome;
-	
+
 	@Deprecated
 	public Categoria() {
-		
+
 	}
-	
+
 	public Categoria(String nome) {
 		this.nome = nome;
 	}
