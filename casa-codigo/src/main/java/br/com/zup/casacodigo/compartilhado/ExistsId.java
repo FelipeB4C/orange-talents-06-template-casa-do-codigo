@@ -11,7 +11,7 @@ import javax.validation.Payload;
 
 @Documented
 @Constraint(validatedBy = {ExistsIdValidator.class})
-@Target({ElementType.FIELD})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExistsId {
 

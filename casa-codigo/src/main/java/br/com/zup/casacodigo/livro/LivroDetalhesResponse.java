@@ -8,7 +8,6 @@ import br.com.zup.casacodigo.categoria.Categoria;
 
 public class LivroDetalhesResponse {
 
-
 	private String titulo;
 	private String resumo;
 	private String sumario;
@@ -16,11 +15,24 @@ public class LivroDetalhesResponse {
 	private int numeroPaginas;
 	private String isbn;
 	private LocalDate dataPublicacao;
-	
+
 	private Categoria categoria;
 
 	private Autor autor;
 
+	public LivroDetalhesResponse(String titulo, String resumo, String sumario, BigDecimal preco, int numeroPaginas,
+			String isbn, LocalDate dataPublicacao, Categoria categoria, Autor autor) {
+		this.titulo = titulo;
+		this.resumo = resumo;
+		this.sumario = sumario;
+		this.preco = preco;
+		this.numeroPaginas = numeroPaginas;
+		this.isbn = isbn;
+		this.dataPublicacao = dataPublicacao;
+		this.categoria = categoria;
+		this.autor = autor;
+	}
+	
 	public LivroDetalhesResponse(Livro livro) {
 		this.titulo = livro.getTitulo();
 		this.resumo = livro.getResumo();
@@ -32,7 +44,7 @@ public class LivroDetalhesResponse {
 		this.categoria = livro.getCategoria();
 		this.autor = livro.getAutor();
 	}
-
+	
 	public String getTitulo() {
 		return titulo;
 	}

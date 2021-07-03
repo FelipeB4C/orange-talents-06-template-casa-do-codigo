@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +47,11 @@ public class LivroResource {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<List<LivroDetalhesResponse>> findAllDetails(){
-		List<Livro> livros = repo.findAll();
-		List<LivroDetalhesResponse> listResponse = livros.stream().map(obj -> new LivroDetalhesResponse(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listResponse);
+	public ResponseEntity<LivroDetalhesResponse> findAllDetails(@PathVariable Integer id){
+		Livro livro = new Livro().verificaIdEBuscaLivro(repo, id);
+		LivroDetalhesResponse detalhes = new LivroDetalhesResponse(livro);
+		return ResponseEntity.ok().body(detalhes);
 	}
+
 
 }

@@ -2,6 +2,7 @@ package br.com.zup.casacodigo.livro;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.zup.casacodigo.autor.Autor;
 import br.com.zup.casacodigo.categoria.Categoria;
+import br.com.zup.casacodigo.compartilhado.ObjectNotFoundException;
 
 @Entity
 public class Livro {
@@ -78,6 +80,13 @@ public class Livro {
 		this.dataPublicacao = dataPublicacao;
 		this.categoria = categoria;
 		this.autor = autor;
+	}
+	
+	public Livro verificaIdEBuscaLivro(LivroRepository repo, Integer id) {
+		Optional<Livro> livro = repo.findById(id);
+		
+		return livro.orElseThrow(() -> 
+		new ObjectNotFoundException("Livro não encontrado não encontrado! Id: " + id));
 	}
 	
 	public Integer getId() {
