@@ -3,12 +3,9 @@ package br.com.zup.casacodigo.compartilhado;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -35,13 +32,6 @@ public class ValidationErrorHandler {
 			responseErro.add(erro);
 		});
 		return responseErro;
-	}
-	
-	
-	@ExceptionHandler(ObjectNotFoundException.class)
-	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request){
-		StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage());
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
 
 }

@@ -10,19 +10,15 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Constraint(validatedBy = {UniqueValueValidator.class})
-@Target({ElementType.FIELD})
+@Constraint(validatedBy = {UniqueEstadoPorPaisValidator.class})
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueValue {
+public @interface UniqueEstadoPorPais {
 
-	String message() default "Erro de validação";
+	String message() default "Erro de validação, esse id não existe";
 
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};
 	
-	String fieldName();
-	
-	Class<?> domainClass();
-
 }

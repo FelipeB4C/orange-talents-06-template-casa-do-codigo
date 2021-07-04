@@ -1,7 +1,11 @@
 package br.com.zup.casacodigo.livro;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.com.zup.casacodigo.autor.Autor;
 import br.com.zup.casacodigo.categoria.Categoria;
@@ -14,37 +18,33 @@ public class LivroDetalhesResponse {
 	private BigDecimal preco;
 	private int numeroPaginas;
 	private String isbn;
-	private LocalDate dataPublicacao;
+	private String dataPublicacao;
 
 	private Categoria categoria;
 
 	private Autor autor;
 
-	public LivroDetalhesResponse(String titulo, String resumo, String sumario, BigDecimal preco, int numeroPaginas,
-			String isbn, LocalDate dataPublicacao, Categoria categoria, Autor autor) {
-		this.titulo = titulo;
-		this.resumo = resumo;
-		this.sumario = sumario;
-		this.preco = preco;
-		this.numeroPaginas = numeroPaginas;
-		this.isbn = isbn;
-		this.dataPublicacao = dataPublicacao;
-		this.categoria = categoria;
-		this.autor = autor;
+	public LivroDetalhesResponse() {
+
 	}
-	
+
 	public LivroDetalhesResponse(Livro livro) {
-		this.titulo = livro.getTitulo();
-		this.resumo = livro.getResumo();
-		this.sumario = livro.getSumario();
-		this.preco = livro.getPreco();
-		this.numeroPaginas = livro.getNumeroPaginas();
-		this.isbn = livro.getIsbn();
-		this.dataPublicacao = livro.getDataPublicacao();
-		this.categoria = livro.getCategoria();
-		this.autor = livro.getAutor();
+		titulo = livro.getTitulo();
+		resumo = livro.getResumo();
+		sumario = livro.getSumario();
+		preco = livro.getPreco();
+		numeroPaginas = livro.getNumeroPaginas();
+		isbn = livro.getIsbn();
+		dataPublicacao = livro.getDataPublicacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		categoria = livro.getCategoria();
+		autor = livro.getAutor();
 	}
-	
+
+	public Livro verificaIdEBuscaLivro(LivroRepository repo, Integer id) {
+		Optional<Livro> livro = repo.findById(id);
+		return livro.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -69,7 +69,7 @@ public class LivroDetalhesResponse {
 		return isbn;
 	}
 
-	public LocalDate getDataPublicacao() {
+	public String getDataPublicacao() {
 		return dataPublicacao;
 	}
 

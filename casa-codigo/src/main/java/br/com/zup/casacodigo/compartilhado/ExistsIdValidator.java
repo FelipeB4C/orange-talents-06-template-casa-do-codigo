@@ -24,17 +24,14 @@ public class ExistsIdValidator implements ConstraintValidator<ExistsId, Object> 
 
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
-		System.out.println("Tô chegando aqui?");
 		Query query = manager.createQuery("select 1 from " + klass.getName() + " where " + domainAttribute + "=:value");
 		query.setParameter("value", value);
 		List<?> list = query.getResultList();
-		System.out.println("E aqui?");
 
 		context.disableDefaultConstraintViolation();
 		context.buildConstraintViolationWithTemplate("Não existe um registro em "+klass.getSimpleName()+" com essa informação: "+value)
 				.addConstraintViolation();
 		
-		System.out.println(list);
 		return !list.isEmpty();
 	}
 
